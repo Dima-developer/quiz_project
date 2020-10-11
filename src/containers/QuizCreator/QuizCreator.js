@@ -5,6 +5,7 @@ import Input from '../../components/UI/Input/Input';
 import Select from '../../components/UI/Select/Select'
 import { createControl, validate, validateForm } from '../form/formFramework';
 import Auxiliary from '../../hoc/Auxiliry/Auxiliary';
+import axios from '../../axios/axios-quiz';
 
 
 function createOptionControl(number) {
@@ -43,17 +44,17 @@ class QuizCreator extends Component {
         const quiz = this.state.quiz.concat();
         const index = quiz.length + 1;
 
-        const {question, option1, option2, option3, option4} = this.state.formControls;
+        const { question, option1, option2, option3, option4 } = this.state.formControls;
 
         const questionItem = {
             question: this.state.formControls.question.value,
             id: index,
             rightAnswerId: this.state.rightAnswerId,
             answers: [
-                {text: option1.value, id: option1.id},
-                {text: option2.value, id: option2.id},
-                {text: option3.value, id: option3.id},
-                {text: option4.value, id: option4.id}
+                { text: option1.value, id: option1.id },
+                { text: option2.value, id: option2.id },
+                { text: option3.value, id: option3.id },
+                { text: option4.value, id: option4.id }
             ]
         }
         quiz.push(questionItem);
@@ -64,11 +65,28 @@ class QuizCreator extends Component {
             formControls: createFormControls()
         })
     }
-    createQuizHandler = (event) => {
+    createQuizHandler = async (event) => {
         event.preventDefault();
 
-        console.log(this.state.quiz);
-    }
+        try {
+            await axios.post('/quizes.json', this.state.quiz);
+            this.setState({
+                quiz: [],
+                isFormValid: false,
+                rightAnswerId: 1,
+                formControls: createFormControls()
+            });
+        } catch (e) {
+            console.log(e);
+        }
+
+    //     
+    //         .then(response => {
+    //             console.log(response)
+    //         })
+    //         .catch(error => console.log(error))
+
+     }
     changeHandler = (value, controlName) => {
         const formControls = { ...this.state.formControls };
         const control = { ...formControls[controlName] };

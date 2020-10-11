@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import classes from './Auth.module.css';
 import Button from '../../components/UI/Button/Button';
 import Input from '../../components/UI/Input/Input';
-import is from 'is_js'
+import is from 'is_js';
+import axios from 'axios';
 
 class Auth extends Component {
     
@@ -35,11 +36,33 @@ class Auth extends Component {
             }
         }
     }
-    loginHandler = () => {
-
+    loginHandler = async() => {
+        const authData = {
+            email: this.state.formControls.email.value,
+            password: this.state.formControls.password.value,
+            returnSecureToken: true
+        }
+        try {
+            const response = axios.post('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBid0BHFt7gIV_nHv_b2Gqhvr24ap7QSYw', authData);
+            
+            console.log(response.data);
+        } catch(e) {
+            console.log(e)
+        }  
     }
-    registerHandler = () => {
-
+    registerHandler = async () => {
+        const authData = {
+            email: this.state.formControls.email.value,
+            password: this.state.formControls.password.value,
+            returnSecureToken: true
+        }
+        try {
+            const response = axios.post('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBid0BHFt7gIV_nHv_b2Gqhvr24ap7QSYw', authData);
+            
+            console.log(response.data);
+        } catch(e) {
+            console.log(e)
+        }  
     }
     submitHandler = event => {
         event.preventDefault();
