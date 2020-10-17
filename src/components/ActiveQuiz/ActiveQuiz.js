@@ -4,12 +4,15 @@ import AnswersList from "./AnswersList/AnswersList";
 
 const ActiveQuiz = props => (
     <div className={classes.ActiveQuiz}>
+        <p className={classes.Question_intemFromItems}>
+            <small>{props.answerNumber} из {props.quizLength}</small>
+        </p>
         <p className={classes.Question}>
             <span>
                 <strong>{props.answerNumber}.</strong>&nbsp;
                 {props.question}
             </span>
-            <small>{props.answerNumber} из {props.quizLength}</small>
+
         </p>
         <AnswersList
             state={props.state}
@@ -18,4 +21,4 @@ const ActiveQuiz = props => (
         />
     </div>
 )
-export  default ActiveQuiz;
+export default ActiveQuiz;

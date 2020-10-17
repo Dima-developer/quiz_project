@@ -39,11 +39,11 @@ const FinishedQuiz = props => {
                     <i className={'fa fa-check ' + classes.success} />
                 </li>*/}
             </ul>
-            <p>Правильно {successCount} из {props.quiz.length}</p>
+            <p>Result: correct answers {successCount} out of {props.quiz.length}</p>
             <div>
-                <Button onClick={props.onRetry} type="primary">Повторить</Button>
+                <Button onClick={props.onRetry} type="primary">Retry</Button>
                 <Link to="/">
-                    <Button type="success">Перейти в список тестов</Button>
+                    <Button type="success">Go to the test list</Button>
                 </Link>
 
             </div>

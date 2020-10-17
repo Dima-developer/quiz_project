@@ -6,6 +6,12 @@
     margin: 0 10px;
     box-sizing: border-box;
 }
+.Question_intemFromItems {
+    display: flex;
+    justify-content: flex-end;
+    margin: 0;
+    padding-top: 0; 
+}
 .Question {
     display: flex;
     justify-content: space-between;
